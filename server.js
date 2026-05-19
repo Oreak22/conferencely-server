@@ -1,16 +1,17 @@
 const express = require("express");
-const https = require("https");
+const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
     origin: "*",
+    methods: ["GET", "POST"],
   },
   pingTimeout: 60000,
   transports: ["websocket", "polling"],
